@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contaminación Ambiental en Nicaragua | Educación Ambiental</title>
+  <meta name="description" content="Aprende sobre las causas, tipos, consecuencias y soluciones de la contaminación ambiental en Nicaragua. Una experiencia educativa interactiva e inmersiva." />
+  <meta name="keywords" content="contaminación ambiental Nicaragua, medio ambiente Nicaragua, ecología Nicaragua, educación ambiental" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <img src="colegio_logo.png" alt="Escudo Centro Educativo El Sendero Divino" class="school-logo">
+      <span>CENTRO EDUCATIVO EL SENDERO DIVINO</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#intro">Introducción</a></li>
+      <li><a href="#que-es">¿Qué es?</a></li>
+      <li><a href="#causas">Causas</a></li>
+      <li><a href="#tipos">Tipos</a></li>
+      <li><a href="#consecuencias">Consecuencias</a></li>
+      <li><a href="#soluciones">Soluciones</a></li>
+      <li><a href="#compromiso">Compromiso</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ===================== HERO SECTION ===================== -->
+  <section class="hero" id="hero">
+    <canvas id="particleCanvas"></canvas>
+
+    <div class="hero-landscape-wrapper">
+      <img src="nicaragua_pristine.jpg" class="hero-landscape pristine" alt="Paisaje natural limpio de Nicaragua">
+      <div class="hero-overlay-dark"></div>
+      <img src="nicaragua_polluted.jpg" class="hero-landscape polluted" id="pollutedLandscape" alt="Paisaje de Nicaragua destruido por la contaminación">
+    </div>
+
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span>🌍 Educación Ambiental</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="title-line1">CONTAMINACIÓN</span>
+        <span class="title-line2">AMBIENTAL EN</span>
+        <span class="title-line3">NICARAGUA</span>
+      </h1>
+      <p class="hero-subtitle">
+        Causas, tipos, consecuencias y soluciones<br>para proteger nuestro futuro.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">130,370</span>
+          <span class="stat-label">km² de territorio</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">35+</span>
+          <span class="stat-label">áreas protegidas</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">7%</span>
+          <span class="stat-label">biodiversidad mundial</span>
+        </div>
+      </div>
+      <a href="#intro" class="btn-explore" id="exploreBtn">
+        <span>Explorar</span>
+        <div class="btn-ripple"></div>
+        <div class="btn-arrow">↓</div>
+      </a>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>Desliza para explorar</span>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION 1: INTRO ===================== -->
+  <section class="section intro-section" id="intro">
+    <div class="section-bg-pattern"></div>
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">01 — Introducción</span>
+        <h2 class="section-title">La Riqueza Natural <br><span class="highlight-text">de Nicaragua</span></h2>
+        <p class="section-desc">Nicaragua es uno de los países más biodiversos de Centroamérica, pero sus ecosistemas enfrentan una amenaza creciente: la contaminación ambiental.</p>
+      </div>
+
+      <div class="nature-grid">
+        <div class="nature-card reveal-up" style="--delay:0.1s" data-type="lago">
+          <div class="card-img-wrap">
+            <img src="lagos_lagunas_nica.png" alt="Lagos y Lagunas de Nicaragua" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Lagos y Lagunas</h3>
+            <p>El Lago Nicaragua (Cocibolca) y el Lago de Managua (Xolotlán) son los cuerpos de agua más grandes de Centroamérica, vitales para millones de personas.</p>
+            <div class="nature-stat">2 grandes lagos + 30 lagunas</div>
+          </div>
+        </div>
+
+        <div class="nature-card reveal-up" style="--delay:0.2s" data-type="rio">
+          <div class="card-img-wrap">
+            <img src="rios_cuencas_nica.png" alt="Ríos y Cuencas de Nicaragua" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Ríos y Cuencas</h3>
+            <p>Más de 21 cuencas hidrográficas cruzan el territorio nicaragüense, siendo el Río Coco el más largo de Centroamérica con 750 km.</p>
+            <div class="nature-stat">+21 cuencas hidrográficas</div>
+          </div>
+        </div>
+
+        <div class="nature-card reveal-up" style="--delay:0.3s" data-type="bosque">
+          <div class="card-img-wrap">
+            <img src="bosques_tropicales_nica.png" alt="Bosques Tropicales de Nicaragua" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Bosques Tropicales</h3>
+            <p>Nicaragua alberga los bosques tropicales más extensos de Centroamérica, incluyendo la Reserva de Biosfera BOSAWÁS, la segunda más grande del hemisferio occidental.</p>
+            <div class="nature-stat">2.6 millones de hectáreas de bosque</div>
+          </div>
+        </div>
+
+        <div class="nature-card reveal-up" style="--delay:0.4s" data-type="biodiversidad">
+          <div class="card-img-wrap">
+            <img src="biodiversidad.png" alt="Biodiversidad de Nicaragua" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Biodiversidad</h3>
+            <p>Nicaragua cuenta con más de 700 especies de aves, 200 de mamíferos, 600 de reptiles y anfibios, representando el 7% de la biodiversidad mundial.</p>
+            <div class="nature-stat">+1,500 especies de fauna</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contamination warning banner -->
+      <div class="warning-banner reveal-up">
+        <div class="warning-icon">⚠️</div>
+        <div class="warning-content">
+          <h4>¡Atención!</h4>
+          <p>A pesar de esta riqueza natural, Nicaragua enfrenta serios problemas de contaminación ambiental que amenazan sus ecosistemas, la salud de su población y el bienestar de las generaciones futuras.</p>
+        </div>
+        <div class="warning-pulse"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION 2: QUÉ ES ===================== -->
+  <section class="section que-es-section" id="que-es">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">02 — Definición</span>
+        <h2 class="section-title">¿Qué es la <span class="highlight-text">Contaminación Ambiental?</span></h2>
+      </div>
+
+      <div class="definition-card reveal-up">
+        <div class="definition-quote">"</div>
+        <p class="definition-text">La contaminación ambiental ocurre cuando el <strong>agua</strong>, el <strong>aire</strong> o el <strong>suelo</strong> reciben sustancias dañinas que alteran su estado natural, poniendo en riesgo la vida de todos los seres vivos del planeta.</p>
+        <div class="definition-quote right">"</div>
+      </div>
+
+      <div class="elements-grid">
+        <!-- Water -->
+        <div class="element-card water reveal-up" style="--delay:0.1s">
+          <div class="element-visual">
+            <img src="agua_elemento.png" alt="Agua limpia de Nicaragua" class="element-image" loading="lazy">
+            <div class="element-waves">
+              <div class="wave wave1"></div>
+              <div class="wave wave2"></div>
+              <div class="wave wave3"></div>
+            </div>
+          </div>
+          <div class="element-content">
+            <h3>Agua</h3>
+            <p>Los cuerpos de agua absorben desechos industriales, agroquímicos y aguas residuales que destruyen ecosistemas acuáticos y afectan la salud humana.</p>
+            <div class="element-indicator">
+              <div class="indicator-bar">
+                <div class="indicator-fill water-fill" data-width="78%"></div>
+              </div>
+              <span>78% de ríos afectados</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Air -->
+        <div class="element-card air reveal-up" style="--delay:0.2s">
+          <div class="element-visual">
+            <img src="aire_elemento.png" alt="Aire puro en Nicaragua" class="element-image" loading="lazy">
+            <div class="element-clouds">
+              <div class="cloud cloud1"></div>
+              <div class="cloud cloud2"></div>
+              <div class="cloud cloud3"></div>
+            </div>
+          </div>
+          <div class="element-content">
+            <h3>Aire</h3>
+            <p>Las emisiones de vehículos, industrias y quemas agrícolas liberan gases tóxicos que deterioran la calidad del aire que respiramos cada día.</p>
+            <div class="element-indicator">
+              <div class="indicator-bar">
+                <div class="indicator-fill air-fill" data-width="65%"></div>
+              </div>
+              <span>65% calidad del aire reducida</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Soil -->
+        <div class="element-card soil reveal-up" style="--delay:0.3s">
+          <div class="element-visual">
+            <img src="suelo_elemento.png" alt="Suelo fértil de Nicaragua" class="element-image" loading="lazy">
+            <div class="element-particles">
+              <div class="soil-particle p1"></div>
+              <div class="soil-particle p2"></div>
+              <div class="soil-particle p3"></div>
+            </div>
+          </div>
+          <div class="element-content">
+            <h3>Suelo</h3>
+            <p>Los plásticos, químicos y basura sin tratar se acumulan en el suelo, contaminando los cultivos, el agua subterránea y eliminando microorganismos esenciales.</p>
+            <div class="element-indicator">
+              <div class="indicator-bar">
+                <div class="indicator-fill soil-fill" data-width="55%"></div>
+              </div>
+              <span>55% de suelos degradados</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION 3: CAUSAS ===================== -->
+  <section class="section causas-section" id="causas">
+    <div class="causas-bg"></div>
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">03 — Causas</span>
+        <h2 class="section-title">Principales <span class="highlight-text">Causas</span></h2>
+        <p class="section-desc">Estas son las principales actividades humanas que generan contaminación ambiental en Nicaragua.</p>
+      </div>
+
+      <div class="causas-grid">
+        <div class="causa-card reveal-up" style="--delay:0.05s">
+          <div class="card-img-wrap">
+            <img src="causa_urbana.png" alt="Crecimiento Urbano Desordenado" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Crecimiento Urbano Desordenado</h3>
+            <p>La expansión sin planificación de ciudades como Managua genera presión sobre ecosistemas naturales y sistemas de agua.</p>
+            <div class="causa-tag">Urbanización</div>
+          </div>
+        </div>
+
+        <div class="causa-card reveal-up" style="--delay:0.1s">
+          <div class="card-img-wrap">
+            <img src="causa_vehiculos.png" alt="Emisiones Vehiculares" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Emisiones Vehiculares</h3>
+            <p>El parque vehicular en crecimiento libera CO₂, monóxido de carbono y partículas finas que deterioran la calidad del aire.</p>
+            <div class="causa-tag">Transporte</div>
+          </div>
+        </div>
+
+        <div class="causa-card reveal-up" style="--delay:0.15s">
+          <div class="card-img-wrap">
+            <img src="causa_basura.png" alt="Manejo Inadecuado de Basura" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Manejo Inadecuado de Basura</h3>
+            <p>Miles de toneladas de residuos sólidos son depositados en vertederos improvisados o ríos sin ningún tratamiento adecuado.</p>
+            <div class="causa-tag">Residuos</div>
+          </div>
+        </div>
+
+        <div class="causa-card reveal-up" style="--delay:0.2s">
+          <div class="card-img-wrap">
+            <img src="causa_deforestacion.png" alt="Deforestación de bosques" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Deforestación</h3>
+            <p>Nicaragua pierde miles de hectáreas de bosque cada año por la tala ilegal, la ganadería extensiva y la agricultura de subsistencia.</p>
+            <div class="causa-tag">Bosques</div>
+          </div>
+        </div>
+
+        <div class="causa-card reveal-up" style="--delay:0.25s">
+          <div class="card-img-wrap">
+            <img src="causa_quemas.png" alt="Quemas Agrícolas en el campo" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Quemas Agrícolas</h3>
+            <p>La práctica de quemar terrenos para la agricultura libera enormes cantidades de CO₂ y partículas tóxicas al ambiente.</p>
+            <div class="causa-tag">Agricultura</div>
+          </div>
+        </div>
+
+        <div class="causa-card reveal-up" style="--delay:0.3s">
+          <div class="card-img-wrap">
+            <img src="causa_residuales.png" alt="Aguas Residuales sin Tratamiento" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Aguas Residuales sin Tratamiento</h3>
+            <p>La mayoría de las aguas servidas domésticas e industriales se vierten directamente a ríos y lagos sin previo tratamiento.</p>
+            <div class="causa-tag">Agua</div>
+          </div>
+        </div>
+
+        <div class="causa-card reveal-up" style="--delay:0.35s">
+          <div class="card-img-wrap">
+            <img src="causa_agroquimicos.png" alt="Uso Excesivo de Agroquímicos" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Uso Excesivo de Agroquímicos</h3>
+            <p>El uso descontrolado de pesticidas y fertilizantes químicos contamina suelos, ríos y napas freáticas afectando la cadena alimentaria.</p>
+            <div class="causa-tag">Agricultura</div>
+          </div>
+        </div>
+
+        <div class="causa-card causa-card-summary reveal-up" style="--delay:0.4s">
+          <div class="summary-content">
+            <span class="summary-icon">📊</span>
+            <h3>Impacto Acumulado</h3>
+            <p>Estas 7 causas principales generan una crisis ambiental que afecta a más de <strong>6.5 millones</strong> de nicaragüenses.</p>
+            <div class="impact-bars">
+              <div class="impact-row"><span>Agua</span><div class="impact-bar"><div class="impact-fill" data-w="78"></div></div><span>78%</span></div>
+              <div class="impact-row"><span>Aire</span><div class="impact-bar"><div class="impact-fill" data-w="65"></div></div><span>65%</span></div>
+              <div class="impact-row"><span>Suelo</span><div class="impact-bar"><div class="impact-fill" data-w="55"></div></div><span>55%</span></div>
+              <div class="impact-row"><span>Bosque</span><div class="impact-bar"><div class="impact-fill" data-w="45"></div></div><span>45%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION 4: TIPOS ===================== -->
+  <section class="section tipos-section" id="tipos">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">04 — Tipos</span>
+        <h2 class="section-title">Tipos de <span class="highlight-text">Contaminación</span></h2>
+        <p class="section-desc">Explora cada tipo de contaminación y su impacto específico en Nicaragua.</p>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div class="tabs-wrapper reveal-up">
+        <div class="tab-nav" role="tablist">
+          <button class="tab-btn active" data-tab="agua" role="tab" aria-selected="true" id="tab-agua">
+            <span class="tab-icon">💧</span><span>Agua</span>
+          </button>
+          <button class="tab-btn" data-tab="aire" role="tab" aria-selected="false" id="tab-aire">
+            <span class="tab-icon">🌫️</span><span>Aire</span>
+          </button>
+          <button class="tab-btn" data-tab="suelo" role="tab" aria-selected="false" id="tab-suelo">
+            <span class="tab-icon">🌱</span><span>Suelo</span>
+          </button>
+          <button class="tab-btn" data-tab="urbana" role="tab" aria-selected="false" id="tab-urbana">
+            <span class="tab-icon">🏙️</span><span>Urbana</span>
+          </button>
+          <div class="tab-indicator"></div>
+        </div>
+
+        <!-- Tab Content: Agua -->
+        <div class="tab-content active" id="content-agua" role="tabpanel">
+          <div class="tab-layout">
+            <div class="tab-visual">
+              <img src="nicaragua_polluted.jpg" alt="Contaminación del Agua en Nicaragua" class="tab-image" loading="lazy">
+            </div>
+            <div class="tab-info">
+              <h3>Contaminación del Agua</h3>
+              <p class="tab-desc">Los recursos hídricos de Nicaragua son los más afectados por la acción humana. El Lago Xolotlán ha sido declarado históricamente uno de los lagos más contaminados de Centroamérica.</p>
+              <ul class="tipo-list">
+                <li>
+                  <span class="tipo-list-icon">🔴</span>
+                  <div>
+                    <strong>Ríos contaminados</strong>
+                    <p>Ríos como el Tipitapa, el Acahualinca y el Negro reciben vertimientos sin tratamiento.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="tipo-list-icon">🔴</span>
+                  <div>
+                    <strong>Lagos afectados</strong>
+                    <p>El Lago de Managua recibe aguas residuales domésticas e industriales de toda la capital.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="tipo-list-icon">🔴</span>
+                  <div>
+                    <strong>Aguas residuales</strong>
+                    <p>Sólo el 36% de la población tiene acceso a saneamiento adecuado en zonas rurales.</p>
+                  </div>
+                </li>
+              </ul>
+              <div class="fact-box water-fact">
+                <span>💡</span>
+                <p>El Lago Xolotlán tardará más de 50 años en recuperarse completamente si se detiene toda contaminación hoy.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Content: Aire -->
+        <div class="tab-content" id="content-aire" role="tabpanel">
+          <div class="tab-layout">
+            <div class="tab-visual">
+              <img src="causa_quemas.png" alt="Contaminación del Aire en Nicaragua" class="tab-image" loading="lazy">
+            </div>
+            <div class="tab-info">
+              <h3>Contaminación del Aire</h3>
+              <p class="tab-desc">Las ciudades nicaragüenses, especialmente Managua, sufren de altos índices de contaminación atmosférica producto de la actividad vehicular y las quemas.</p>
+              <ul class="tipo-list">
+                <li>
+                  <span class="tipo-list-icon">🟠</span>
+                  <div>
+                    <strong>Humo vehicular</strong>
+                    <p>Más de 700,000 vehículos en el país liberan gases de efecto invernadero diariamente.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="tipo-list-icon">🟠</span>
+                  <div>
+                    <strong>Quemas agrícolas</strong>
+                    <p>La temporada de quemas (enero-abril) reduce la visibilidad y eleva los niveles de PM2.5.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="tipo-list-icon">🟠</span>
+                  <div>
+                    <strong>Polvo y partículas</strong>
+                    <p>Las calles sin pavimentar y construcciones contribuyen a altos niveles de polvo suspendido.</p>
+                  </div>
+                </li>
+              </ul>
+              <div class="fact-box aire-fact">
+                <span>💡</span>
+                <p>Nicaragua emite 6.5 millones de toneladas de CO₂ equivalente por año, principalmente por la deforestación y el transporte.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Content: Suelo -->
+        <div class="tab-content" id="content-suelo" role="tabpanel">
+          <div class="tab-layout">
+            <div class="tab-visual">
+              <img src="causa_agroquimicos.png" alt="Contaminación del Suelo en Nicaragua" class="tab-image" loading="lazy">
+            </div>
+            <div class="tab-info">
+              <h3>Contaminación del Suelo</h3>
+              <p class="tab-desc">Los suelos nicaragüenses sufren la acumulación de plásticos, químicos agrícolas y basura, degradando su capacidad productiva y afectando las comunidades rurales.</p>
+              <ul class="tipo-list">
+                <li>
+                  <span class="tipo-list-icon">🟤</span>
+                  <div>
+                    <strong>Basura sin gestión</strong>
+                    <p>El 55% de los residuos sólidos no tiene manejo adecuado y termina en vertederos ilegales.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="tipo-list-icon">🟤</span>
+                  <div>
+                    <strong>Plásticos</strong>
+                    <p>Nicaragua genera más de 400 toneladas diarias de plásticos, la mayoría sin reciclaje.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="tipo-list-icon">🟤</span>
+                  <div>
+                    <strong>Agroquímicos</strong>
+                    <p>El uso de plaguicidas como el Endosulfán ha contaminado suelos en las zonas agrícolas del Pacífico.</p>
+                  </div>
+                </li>
+              </ul>
+              <div class="fact-box suelo-fact">
+                <span>💡</span>
+                <p>Una bolsa plástica tarda entre 100 y 500 años en degradarse en el suelo. Nicaragua consume millones de bolsas diariamente.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Content: Urbana -->
+        <div class="tab-content" id="content-urbana" role="tabpanel">
+          <div class="tab-layout">
+            <div class="tab-visual">
+              <img src="causa_basura.png" alt="Contaminación Urbana en Nicaragua" class="tab-image" loading="lazy">
+            </div>
+            <div class="tab-info">
+              <h3>Contaminación Urbana</h3>
+              <p class="tab-desc">Las ciudades en crecimiento de Nicaragua enfrentan problemas de contaminación acústica, olfativa y visual que deterioran la calidad de vida de sus habitantes.</p>
+              <ul class="tipo-list">
+                <li>
+                  <span class="tipo-list-icon">🔵</span>
+                  <div>
+                    <strong>Contaminación acústica</strong>
+                    <p>El ruido de tráfico, comercios y altavoces supera los 65 dB recomendados en zonas residenciales.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="tipo-list-icon">🔵</span>
+                  <div>
+                    <strong>Malos olores</strong>
+                    <p>Vertederos, aguas estancadas y mercados sin saneamiento generan gases nocivos en áreas urbanas.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="tipo-list-icon">🔵</span>
+                  <div>
+                    <strong>Contaminación visual</strong>
+                    <p>El exceso de publicidad, cables aéreos y basura deterioran el paisaje urbano y la salud mental.</p>
+                  </div>
+                </li>
+              </ul>
+              <div class="fact-box urbana-fact">
+                <span>💡</span>
+                <p>Managua concentra el 30% de la población nacional en apenas el 0.5% del territorio, generando una enorme presión ambiental urbana.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION 5: CONSECUENCIAS ===================== -->
+  <section class="section consecuencias-section" id="consecuencias">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">05 — Consecuencias</span>
+        <h2 class="section-title">Las <span class="highlight-text">Consecuencias</span> de la Contaminación</h2>
+        <p class="section-desc">La contaminación tiene efectos devastadores en la salud humana y los ecosistemas de Nicaragua.</p>
+      </div>
+
+      <div class="timeline-container reveal-up">
+        <div class="timeline-line"></div>
+
+        <div class="timeline-item left">
+          <div class="timeline-icon">😮‍💨</div>
+          <div class="timeline-content">
+            <div class="timeline-category health">Salud Humana</div>
+            <h4>Enfermedades Respiratorias</h4>
+            <p>El asma, bronquitis y otras enfermedades respiratorias se han incrementado un 30% en los últimos 10 años en zonas urbanas de Nicaragua.</p>
+            <div class="timeline-stat">+30% casos en 10 años</div>
+          </div>
+        </div>
+
+        <div class="timeline-item right">
+          <div class="timeline-icon">🤢</div>
+          <div class="timeline-content">
+            <div class="timeline-category health">Salud Humana</div>
+            <h4>Enfermedades Gastrointestinales</h4>
+            <p>El consumo de agua contaminada causa más de 5,000 casos anuales de enfermedades diarreicas en niños menores de 5 años.</p>
+            <div class="timeline-stat">5,000 casos anuales en niños</div>
+          </div>
+        </div>
+
+        <div class="timeline-item left">
+          <div class="timeline-icon">🦋</div>
+          <div class="timeline-content">
+            <div class="timeline-category ecology">Biodiversidad</div>
+            <h4>Pérdida de Biodiversidad</h4>
+            <p>Más de 200 especies de flora y fauna nicaragüense están en peligro de extinción por la destrucción de hábitats y la contaminación.</p>
+            <div class="timeline-stat">200+ especies en peligro</div>
+          </div>
+        </div>
+
+        <div class="timeline-item right">
+          <div class="timeline-icon">🚱</div>
+          <div class="timeline-content">
+            <div class="timeline-category water">Recursos Hídricos</div>
+            <h4>Menor Disponibilidad de Agua Limpia</h4>
+            <p>El 40% de las fuentes de agua superficial en Nicaragua presenta niveles de contaminación que hacen el agua no apta para consumo humano directo.</p>
+            <div class="timeline-stat">40% de fuentes afectadas</div>
+          </div>
+        </div>
+
+        <div class="timeline-item left">
+          <div class="timeline-icon">🏜️</div>
+          <div class="timeline-content">
+            <div class="timeline-category ecology">Suelos</div>
+            <h4>Degradación de Suelos</h4>
+            <p>Más de 500,000 hectáreas de tierra agrícola en Nicaragua presentan algún grado de degradación por erosión, salinización o contaminación química.</p>
+            <div class="timeline-stat">500,000 ha degradadas</div>
+          </div>
+        </div>
+
+        <div class="timeline-item right">
+          <div class="timeline-icon">🌡️</div>
+          <div class="timeline-content">
+            <div class="timeline-category climate">Cambio Climático</div>
+            <h4>Mayor Vulnerabilidad Climática</h4>
+            <p>Nicaragua es el 4to país más vulnerable al cambio climático en América Latina. La contaminación agrava fenómenos como sequías, inundaciones y huracanes.</p>
+            <div class="timeline-stat">4to país más vulnerable en LATAM</div>
+          </div>
+        </div>
+
+        <div class="timeline-item left">
+          <div class="timeline-icon">🌿</div>
+          <div class="timeline-content">
+            <div class="timeline-category ecology">Ecosistemas</div>
+            <h4>Deterioro de Ecosistemas</h4>
+            <p>Los arrecifes de coral de la Costa Caribe, los humedales de Río San Juan y los bosques secos del Pacífico están gravemente amenazados.</p>
+            <div class="timeline-stat">3 ecosistemas críticos en riesgo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- ===================== SECTION 6: MAPA IMPACTO ===================== -->
+  <section class="section mapa-section" id="mapa">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">06 — Impacto Territorial</span>
+        <h2 class="section-title">Impacto en el <span class="highlight-text">Territorio Nicaragüense</span></h2>
+        <p class="section-desc">Haz clic en las regiones del mapa para conocer el impacto de la contaminación en cada zona.</p>
+      </div>
+
+      <div class="impact-map-container reveal-up">
+        <div class="impact-map-wrapper">
+          <!-- ===== MAPA DE NICARAGUA — IMÁGENES PNG REALES ===== -->
+          <div class="map-svg-container">
+
+            <!-- MAPA PRINCIPAL: imágenes PNG superpuestas -->
+            <div class="map-img-stack" id="mapImgStack">
+
+              <!-- BASE: mapa completo con las 3 regiones en color -->
+              <img src="mapa_completo.png"
+                   alt="Mapa Nicaragua 3 regiones"
+                   class="map-base-img"
+                   id="map-base"
+                   draggable="false">
+
+              <!-- CAPA Pacífico (naranja) — clic activa panel -->
+              <img src="mapa_pacifico.png"
+                   alt="Región del Pacífico"
+                   class="map-region-img"
+                   id="region-pacifico"
+                   data-region="pacifico"
+                   onclick="selectRegion('pacifico')"
+                   draggable="false">
+
+              <!-- CAPA Central (verde) — clic activa panel -->
+              <img src="mapa_central.png"
+                   alt="Región Central"
+                   class="map-region-img"
+                   id="region-central"
+                   data-region="central"
+                   onclick="selectRegion('central')"
+                   draggable="false">
+
+              <!-- CAPA Caribe (azul) — clic activa panel -->
+              <img src="mapa_caribe.png"
+                   alt="Costa Caribe"
+                   class="map-region-img"
+                   id="region-caribe"
+                   data-region="caribe"
+                   onclick="selectRegion('caribe')"
+                   draggable="false">
+            </div>
+
+            <!-- Botones selector de región -->
+            <div class="region-selector-btns">
+              <button class="region-sel-btn active" id="thumb-pacifico"
+                      onclick="selectRegion('pacifico')">
+                <span class="sel-dot" style="background:#F5A623;box-shadow:0 0 8px rgba(245,166,35,0.6);"></span>
+                <span>Pacífico</span>
+              </button>
+              <button class="region-sel-btn" id="thumb-central"
+                      onclick="selectRegion('central')">
+                <span class="sel-dot" style="background:#5DBE4A;box-shadow:0 0 8px rgba(93,190,74,0.6);"></span>
+                <span>Central</span>
+              </button>
+              <button class="region-sel-btn" id="thumb-caribe"
+                      onclick="selectRegion('caribe')">
+                <span class="sel-dot" style="background:#3B7EC8;box-shadow:0 0 8px rgba(59,126,200,0.6);"></span>
+                <span>Caribe</span>
+              </button>
+            </div>
+
+            <p class="map-instruction">↑ Haz clic en una región para ver su información</p>
+          </div>
+
+          <!-- Region Info Panels -->
+          <div class="region-panels">
+            <div class="region-panel active" id="panel-pacifico">
+              <div class="panel-header">
+                <div class="panel-badge pacifico-badge">PACÍFICO</div>
+                <span class="panel-icon">🌋</span>
+                <h4>Región del Pacífico</h4>
+              </div>
+              <p>La región más densamente poblada, concentra el mayor impacto industrial y urbano. Alberga Managua, León, Chinandega, Masaya, Granada y Rivas sobre la fértil llanura volcánica.</p>
+              <ul class="panel-impacts">
+                <li>🔴 Contaminación atmosférica por tráfico</li>
+                <li>🔴 Aguas residuales al Lago Xolotlán</li>
+                <li>🔴 Residuos sólidos sin tratamiento</li>
+                <li>🟡 Deforestación para ganadería</li>
+              </ul>
+              <div class="panel-severity high">⚠ Nivel de riesgo: ALTO</div>
+            </div>
+            <div class="region-panel" id="panel-central">
+              <div class="panel-header">
+                <div class="panel-badge central-badge">CENTRAL</div>
+                <span class="panel-icon">⛰️</span>
+                <h4>Región Central</h4>
+              </div>
+              <p>Zona montañosa con importantes reservas forestales. Comprende Matagalpa, Jinotega, Boaco, Chontales y Estelí, afectada por la deforestación y los agroquímicos en sus cuencas.</p>
+              <ul class="panel-impacts">
+                <li>🟠 Deforestación acelerada</li>
+                <li>🟠 Agroquímicos en cuencas hidrográficas</li>
+                <li>🟡 Erosión de suelos</li>
+                <li>🟢 Áreas protegidas parcialmente conservadas</li>
+              </ul>
+              <div class="panel-severity medium">⚠ Nivel de riesgo: MEDIO</div>
+            </div>
+            <div class="region-panel" id="panel-caribe">
+              <div class="panel-header">
+                <div class="panel-badge caribe-badge">CARIBE</div>
+                <span class="panel-icon">🌊</span>
+                <h4>Costa Caribe</h4>
+              </div>
+              <p>La región más biodiversa, con la Reserva BOSAWÁS y extensos bosques tropicales de la RAAN y RAAS. Amenazada por la minería ilegal y el avance de la frontera agrícola.</p>
+              <ul class="panel-impacts">
+                <li>🟡 Minería artesanal con mercurio</li>
+                <li>🟡 Deforestación en áreas de frontera</li>
+                <li>🟢 Mayor cobertura forestal del país</li>
+                <li>🟢 Menor presión urbana</li>
+              </ul>
+              <div class="panel-severity low">✅ Nivel de riesgo: MODERADO</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-legend">
+          <div class="legend-item"><span class="legend-color high-risk"></span><span>Alto riesgo de contaminación</span></div>
+          <div class="legend-item"><span class="legend-color medium-risk"></span><span>Riesgo moderado</span></div>
+          <div class="legend-item"><span class="legend-color low-risk"></span><span>Zonas protegidas</span></div>
+          <div class="legend-item"><span class="legend-color lake-risk"></span><span>Cuerpos de agua</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION 7: SOLUCIONES ===================== -->
+  <section class="section soluciones-section" id="soluciones">
+    <div class="soluciones-bg"></div>
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">07 — Soluciones</span>
+        <h2 class="section-title">Juntos Podemos <span class="highlight-text-green">Cambiar el Futuro</span></h2>
+        <p class="section-desc">Estas son las acciones más efectivas para combatir la contaminación ambiental en Nicaragua.</p>
+      </div>
+
+      <div class="soluciones-grid">
+        <div class="solucion-card reveal-stagger" style="--i:1">
+          <div class="solucion-bg-glow edu"></div>
+          <div class="card-img-wrap">
+            <img src="solucion_educacion.png" alt="Educación Ambiental" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Educación Ambiental</h3>
+            <p>Incorporar la educación ambiental en todos los niveles del sistema educativo nicaragüense para crear conciencia desde temprana edad.</p>
+            <div class="solucion-impact">
+              <span class="impact-label">Impacto potencial</span>
+              <div class="impact-dots">
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="solucion-card reveal-stagger" style="--i:2">
+          <div class="solucion-bg-glow tree"></div>
+          <div class="card-img-wrap">
+            <img src="solucion_reforestacion.png" alt="Reforestación en Nicaragua" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Reforestación</h3>
+            <p>Implementar programas masivos de reforestación en zonas degradadas, protegiendo las cuencas hidrográficas y restaurando ecosistemas.</p>
+            <div class="solucion-impact">
+              <span class="impact-label">Impacto potencial</span>
+              <div class="impact-dots">
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="solucion-card reveal-stagger" style="--i:3">
+          <div class="solucion-bg-glow recycle"></div>
+          <div class="card-img-wrap">
+            <img src="solucion_reciclaje.png" alt="Reciclaje y Separación de Residuos" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Reciclaje y Separación de Residuos</h3>
+            <p>Establecer sistemas de separación de residuos desde el hogar y crear infraestructura de reciclaje en todo el país.</p>
+            <div class="solucion-impact">
+              <span class="impact-label">Impacto potencial</span>
+              <div class="impact-dots">
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="solucion-card reveal-stagger" style="--i:4">
+          <div class="solucion-bg-glow water"></div>
+          <div class="card-img-wrap">
+            <img src="solucion_tratamiento.png" alt="Tratamiento de Aguas Residuales" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Tratamiento de Aguas Residuales</h3>
+            <p>Construir y modernizar plantas de tratamiento de aguas residuales para proteger los ríos y lagos de Nicaragua.</p>
+            <div class="solucion-impact">
+              <span class="impact-label">Impacto potencial</span>
+              <div class="impact-dots">
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="solucion-card reveal-stagger" style="--i:5">
+          <div class="solucion-bg-glow industry"></div>
+          <div class="card-img-wrap">
+            <img src="solucion_emisiones.png" alt="Control de Emisiones" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Control de Emisiones</h3>
+            <p>Regular y reducir las emisiones de vehículos e industrias mediante estándares ambientales más estrictos y tecnologías limpias.</p>
+            <div class="solucion-impact">
+              <span class="impact-label">Impacto potencial</span>
+              <div class="impact-dots">
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="solucion-card reveal-stagger" style="--i:6">
+          <div class="solucion-bg-glow people"></div>
+          <div class="card-img-wrap">
+            <img src="solucion_participacion.png" alt="Participación Ciudadana" class="card-image" loading="lazy">
+          </div>
+          <div class="card-text-content">
+            <h3>Participación Ciudadana</h3>
+            <p>Involucrar a las comunidades en la vigilancia ambiental, brigadas de limpieza y monitoreo de ecosistemas locales.</p>
+            <div class="solucion-impact">
+              <span class="impact-label">Impacto potencial</span>
+              <div class="impact-dots">
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION 8: COMPROMISO ===================== -->
+  <section class="section compromiso-section" id="compromiso">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">08 — Tu Compromiso</span>
+        <h2 class="section-title">¿Cuál es tu <span class="highlight-text">Compromiso</span>?</h2>
+        <p class="section-desc">Marca las acciones que te comprometes a realizar y observa cómo Nicaragua se transforma.</p>
+      </div>
+
+      <div class="compromiso-layout">
+        <div class="checklist-container reveal-up">
+          <div class="checklist-header">
+            <h3>Mis Compromisos Ambientales</h3>
+            <div class="progress-ring-container">
+              <svg class="progress-ring" width="80" height="80" viewBox="0 0 80 80">
+                <circle class="ring-bg" cx="40" cy="40" r="32" stroke="#e0e0e0" stroke-width="6" fill="none"/>
+                <circle class="ring-progress" id="progressRing" cx="40" cy="40" r="32" stroke="#2E7D32" stroke-width="6" fill="none"
+                  stroke-dasharray="201" stroke-dashoffset="201" stroke-linecap="round"/>
+              </svg>
+              <span class="ring-label" id="progressLabel">0%</span>
+            </div>
+          </div>
+
+          <div class="checklist-items">
+            <label class="check-item" id="check-basura">
+              <input type="checkbox" class="check-input" data-action="basura" />
+              <div class="check-visual">
+                <div class="check-icon-bg"></div>
+                <span class="check-icon">🗑️</span>
+                <div class="check-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20,6 9,17 4,12"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="check-content">
+                <strong>No tirar basura</strong>
+                <span>Depositar siempre la basura en los contenedores adecuados</span>
+              </div>
+            </label>
+
+            <label class="check-item" id="check-agua">
+              <input type="checkbox" class="check-input" data-action="agua" />
+              <div class="check-visual">
+                <div class="check-icon-bg"></div>
+                <span class="check-icon">💧</span>
+                <div class="check-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20,6 9,17 4,12"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="check-content">
+                <strong>Ahorrar agua</strong>
+                <span>Cerrar el grifo al cepillarme, usar menos tiempo la ducha</span>
+              </div>
+            </label>
+
+            <label class="check-item" id="check-arboles">
+              <input type="checkbox" class="check-input" data-action="arboles" />
+              <div class="check-visual">
+                <div class="check-icon-bg"></div>
+                <span class="check-icon">🌳</span>
+                <div class="check-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20,6 9,17 4,12"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="check-content">
+                <strong>Sembrar árboles</strong>
+                <span>Participar en jornadas de reforestación en mi comunidad</span>
+              </div>
+            </label>
+
+            <label class="check-item" id="check-reciclar">
+              <input type="checkbox" class="check-input" data-action="reciclar" />
+              <div class="check-visual">
+                <div class="check-icon-bg"></div>
+                <span class="check-icon">♻️</span>
+                <div class="check-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20,6 9,17 4,12"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="check-content">
+                <strong>Reciclar</strong>
+                <span>Separar plástico, vidrio, papel y orgánicos en casa</span>
+              </div>
+            </label>
+
+            <label class="check-item" id="check-quemas">
+              <input type="checkbox" class="check-input" data-action="quemas" />
+              <div class="check-visual">
+                <div class="check-icon-bg"></div>
+                <span class="check-icon">🚫🔥</span>
+                <div class="check-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20,6 9,17 4,12"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="check-content">
+                <strong>Evitar quemas</strong>
+                <span>No quemar basura ni vegetación, reportar incendios forestales</span>
+              </div>
+            </label>
+          </div>
+
+          <div class="completion-badge" id="completionBadge">
+            <div class="badge-shine"></div>
+            <span class="badge-icon">🏆</span>
+            <h4>¡Comprometido!</h4>
+            <p>Eres un guardián del medio ambiente de Nicaragua</p>
+          </div>
+        </div>
+
+        <!-- Visual Nicaragua transformation -->
+        <div class="nicaragua-transform reveal-up">
+          <h3>Nicaragua se transforma</h3>
+          <div class="transform-map">
+            <div class="transform-bg" id="transformBg"></div>
+            <svg class="transform-svg" viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="transformGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#2E7D32;stop-opacity:1" id="gradStop1"/>
+                  <stop offset="100%" style="stop-color:#1B5E20;stop-opacity:1" id="gradStop2"/>
+                </linearGradient>
+              </defs>
+              <path class="transform-land" d="
+                M 50,65
+                L 70,42 L 100,33 L 130,28 L 155,38
+                L 165,65 L 160,95 L 150,120
+                L 138,150 L 128,178 L 125,205
+                L 130,230 L 125,250 L 110,258
+                L 95,248 L 78,228 L 62,205
+                L 50,180 L 42,155 L 40,130 L 44,105 Z
+              " fill="url(#transformGrad)" stroke="#4CAF50" stroke-width="2"/>
+
+              <!-- Trees that grow in -->
+              <g class="growing-trees" id="growingTrees">
+                <text class="grow-tree t1" x="85" y="100" font-size="14" opacity="0">🌳</text>
+                <text class="grow-tree t2" x="120" y="130" font-size="12" opacity="0">🌿</text>
+                <text class="grow-tree t3" x="70" y="145" font-size="10" opacity="0">🌱</text>
+                <text class="grow-tree t4" x="140" y="100" font-size="11" opacity="0">🌲</text>
+                <text class="grow-tree t5" x="100" y="170" font-size="13" opacity="0">🌳</text>
+                <text class="grow-tree t6" x="60" y="115" font-size="10" opacity="0">🌿</text>
+                <text class="grow-tree t7" x="130" y="165" font-size="11" opacity="0">🌱</text>
+                <text class="grow-tree t8" x="90" y="200" font-size="12" opacity="0">🌳</text>
+              </g>
+
+              <!-- Lake -->
+              <ellipse cx="130" cy="235" rx="32" ry="18" fill="#0288D1" opacity="0.8"/>
+            </svg>
+
+            <!-- Health meter -->
+            <div class="health-meter">
+              <div class="health-label">Salud ambiental</div>
+              <div class="health-bar-bg">
+                <div class="health-bar-fill" id="healthBarFill"></div>
+              </div>
+              <div class="health-percentage" id="healthPercentage">0%</div>
+            </div>
+          </div>
+
+          <!-- Environmental score -->
+          <div class="eco-score">
+            <div class="eco-score-ring">
+              <svg width="120" height="120" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
+                <circle cx="60" cy="60" r="52" fill="none" stroke="#4CAF50" stroke-width="8"
+                  stroke-dasharray="327" stroke-dashoffset="327" stroke-linecap="round"
+                  id="ecoScoreCircle" transform="rotate(-90 60 60)"/>
+              </svg>
+              <div class="eco-score-value">
+                <span id="ecoScore">0</span>
+                <small>/ 100</small>
+              </div>
+            </div>
+            <div class="eco-score-label">
+              <h4>Puntaje Ecológico</h4>
+              <p id="ecoMessage">Comienza marcando tus compromisos</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FINAL SECTION ===================== -->
+  <section class="section final-section" id="final">
+    <div class="final-bg">
+      <div class="final-sky"></div>
+      <div class="growing-forest" id="growingForest">
+        <div class="forest-tree ft1">🌲</div>
+        <div class="forest-tree ft2">🌳</div>
+        <div class="forest-tree ft3">🌿</div>
+        <div class="forest-tree ft4">🌲</div>
+        <div class="forest-tree ft5">🌳</div>
+        <div class="forest-tree ft6">🌱</div>
+        <div class="forest-tree ft7">🌲</div>
+        <div class="forest-tree ft8">🌳</div>
+        <div class="forest-tree ft9">🌿</div>
+      </div>
+      <div class="sun-rise"></div>
+      <div class="birds-fly">
+        <span class="bird b1">🐦</span>
+        <span class="bird b2">🦅</span>
+        <span class="bird b3">🐦</span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="final-content">
+        <div class="final-badge reveal-up">🌍 Mensaje Final</div>
+        <blockquote class="final-quote reveal-up">
+          <span class="quote-mark">"</span>
+          Cuidar el medio ambiente es responsabilidad de todos. Las <strong>pequeñas acciones de hoy</strong> pueden garantizar un futuro más <strong>limpio y saludable</strong> para las próximas generaciones.
+          <span class="quote-mark end">"</span>
+        </blockquote>
+
+        <div class="final-actions reveal-up">
+          <a href="#hero" class="btn-primary">
+            <span>Volver al inicio</span>
+            <span>↑</span>
+          </a>
+          <button class="btn-secondary" id="shareBtn" onclick="sharePage()">
+            <span>Compartir este mensaje</span>
+            <span>📤</span>
+          </button>
+        </div>
+
+        <div class="credits reveal-up">
+          <p>Proyecto Educativo sobre Contaminación Ambiental en Nicaragua</p>
+          <div class="credits-tags">
+            <span>#EcoNicaragua</span>
+            <span>#MedioAmbiente</span>
+            <span>#Nicaragua</span>
+            <span>#EducaciónAmbiental</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span>🌿</span>
+            <span>EcoNicaragua</span>
+          </div>
+          <p>Educando para un futuro más verde y sostenible en Nicaragua.</p>
+        </div>
+        <div class="footer-links">
+          <h5>Secciones</h5>
+          <ul>
+            <li><a href="#intro">Introducción</a></li>
+            <li><a href="#que-es">¿Qué es?</a></li>
+            <li><a href="#causas">Causas</a></li>
+            <li><a href="#tipos">Tipos</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h5>Más</h5>
+          <ul>
+            <li><a href="#consecuencias">Consecuencias</a></li>
+            <li><a href="#mapa">Mapa</a></li>
+            <li><a href="#soluciones">Soluciones</a></li>
+            <li><a href="#compromiso">Compromiso</a></li>
+          </ul>
+        </div>
+        <div class="footer-eco">
+          <h5>Dato Verde</h5>
+          <p class="eco-fact-text" id="footerFact">Plantar un árbol absorbe aproximadamente 22 kg de CO₂ al año.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 EcoNicaragua — Proyecto de Educación Ambiental</p>
+        <p>Hecho con 💚 por la naturaleza</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top" id="scrollTop" aria-label="Volver arriba">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+  <script src="main.js"></script>
+</body>
+</html>
