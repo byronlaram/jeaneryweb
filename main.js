@@ -241,14 +241,14 @@
 // INTERACTIVE MAP — NICARAGUA REGIONS
 // ============================================================
 function selectRegion(regionId) {
-  // ── Imágenes PNG de región ──
-  const regionImgs = document.querySelectorAll('.map-region-img');
-  regionImgs.forEach(img => img.classList.remove('active'));
+  // ── Grupos SVG de región ──
+  const regionGroups = document.querySelectorAll('.map-region-group');
+  regionGroups.forEach(g => g.classList.remove('active'));
 
-  const activeImg = document.getElementById('region-' + regionId);
-  if (activeImg) {
-    activeImg.classList.add('active');
-    const stack = document.getElementById('mapImgStack');
+  const activeGroup = document.getElementById('svg-region-' + regionId);
+  if (activeGroup) {
+    activeGroup.classList.add('active');
+    const stack = document.getElementById('mapSvgStack');
     if (stack) stack.classList.add('has-active');
   }
 
@@ -283,8 +283,13 @@ function selectRegion(regionId) {
   const ecoScore = document.getElementById('ecoScore');
   const ecoMessage = document.getElementById('ecoMessage');
   const ecoScoreCircle = document.getElementById('ecoScoreCircle');
-  const growingTrees = document.querySelectorAll('.grow-tree');
   const transformBg = document.getElementById('transformBg');
+
+  // Image transition elements
+  const transformPristine = document.getElementById('transformPristine');
+  const transformPolluted = document.getElementById('transformPolluted');
+  const transformLabelText = document.getElementById('transformLabelText');
+  const transformLabelIcon = document.querySelector('.transform-label-icon');
 
   const totalRingCircumference = 201;
   const totalEcoCircumference = 327;
@@ -298,6 +303,16 @@ function selectRegion(regionId) {
     '¡Eres un guardián del medio ambiente! 🌿'
   ];
 
+  // Label states based on progress
+  const labelStates = [
+    { icon: '🌫️', text: 'Nicaragua contaminada' },
+    { icon: '🌥️', text: 'Iniciando la recuperación...' },
+    { icon: '🌤️', text: 'Mejorando poco a poco' },
+    { icon: '🌿', text: 'La naturaleza respira' },
+    { icon: '🌳', text: 'Nicaragua se renueva' },
+    { icon: '🌟', text: '¡Nicaragua limpia y verde!' }
+  ];
+
   function updateChecklist() {
     const checked = document.querySelectorAll('.check-input:checked').length;
     const total = checkInputs.length;
@@ -305,46 +320,56 @@ function selectRegion(regionId) {
 
     // Progress ring
     const offset = totalRingCircumference - (totalRingCircumference * percent / 100);
-    progressRing.style.strokeDashoffset = offset;
-    progressLabel.textContent = percent + '%';
+    if (progressRing) progressRing.style.strokeDashoffset = offset;
+    if (progressLabel) progressLabel.textContent = percent + '%';
 
     // Health bar
-    healthBarFill.style.width = percent + '%';
-    healthPercentage.textContent = percent + '%';
+    if (healthBarFill) healthBarFill.style.width = percent + '%';
+    if (healthPercentage) healthPercentage.textContent = percent + '%';
 
     // Eco score
     const score = Math.round(percent);
-    ecoScore.textContent = score;
+    if (ecoScore) ecoScore.textContent = score;
     const ecoOffset = totalEcoCircumference - (totalEcoCircumference * score / 100);
-    ecoScoreCircle.style.strokeDashoffset = ecoOffset;
+    if (ecoScoreCircle) ecoScoreCircle.style.strokeDashoffset = ecoOffset;
 
     // Eco message
     const msgIndex = Math.floor(checked * (ecoMessages.length - 1) / total);
-    ecoMessage.textContent = ecoMessages[Math.min(msgIndex, ecoMessages.length - 1)];
+    if (ecoMessage) ecoMessage.textContent = ecoMessages[Math.min(msgIndex, ecoMessages.length - 1)];
 
-    // Growing trees
-    growingTrees.forEach((tree, i) => {
-      if (i < checked * Math.ceil(growingTrees.length / total)) {
-        tree.style.opacity = '1';
-        tree.style.transform = 'scale(1)';
-      } else {
-        tree.style.opacity = '0';
-        tree.style.transform = 'scale(0)';
-      }
-    });
+    // ── IMAGE TRANSITION ──
+    // The pristine image fades in proportionally to the % of completed items.
+    // At 0% → fully polluted  |  At 100% → fully pristine
+    if (transformPristine) {
+      transformPristine.style.opacity = (percent / 100).toFixed(2);
+    }
 
-    // Transform background
+    // Update label
+    if (transformLabelText && transformLabelIcon) {
+      const stateIndex = Math.min(
+        Math.floor((checked / total) * (labelStates.length - 1)),
+        labelStates.length - 1
+      );
+      // Smooth label transition
+      const state = labelStates[stateIndex];
+      transformLabelIcon.textContent = state.icon;
+      transformLabelText.textContent = state.text;
+    }
+
+    // Transform background glow (keeps the subtle gradient)
     if (transformBg) {
       const greenIntensity = percent / 100;
-      transformBg.style.background = `radial-gradient(ellipse at 50% 50%, rgba(46,125,50,${greenIntensity * 0.3}) 0%, transparent 70%)`;
+      transformBg.style.background = `radial-gradient(ellipse at 50% 50%, rgba(46,125,50,${greenIntensity * 0.25}) 0%, transparent 70%)`;
     }
 
     // Completion badge
-    if (checked === total) {
-      completionBadge.classList.add('visible');
-      triggerConfetti();
-    } else {
-      completionBadge.classList.remove('visible');
+    if (completionBadge) {
+      if (checked === total) {
+        completionBadge.classList.add('visible');
+        triggerConfetti();
+      } else {
+        completionBadge.classList.remove('visible');
+      }
     }
   }
 
@@ -355,8 +380,8 @@ function selectRegion(regionId) {
       // Ripple effect on label
       const label = input.closest('.check-item');
       if (label && input.checked) {
-        label.style.borderColor = 'rgba(76,175,80,0.5)';
-        label.style.background = 'rgba(46,125,50,0.1)';
+        label.style.borderColor = 'rgba(46,125,50,0.5)';
+        label.style.background = 'rgba(46,125,50,0.08)';
         setTimeout(() => {
           label.style.borderColor = '';
           label.style.background = '';
@@ -364,16 +389,8 @@ function selectRegion(regionId) {
       }
     });
   });
-
-  // Initialize tree transforms
-  growingTrees.forEach(tree => {
-    tree.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
-    tree.style.opacity = '0';
-    tree.style.transform = 'scale(0)';
-    tree.style.transformOrigin = 'bottom center';
-    tree.removeAttribute('opacity'); // Remove SVG opacity attr, use CSS
-  });
 })();
+
 
 // ============================================================
 // CONFETTI ANIMATION
@@ -819,3 +836,311 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, 1000);
 });
+
+// ============================================================
+// SECTION 8: VISOR DE CAPÍTULOS
+// ============================================================
+const CHAPTERS_DATA = [
+  {
+    num: "01",
+    title: "Introducción al Reporte Ambiental",
+    text: `La contaminación ambiental en Nicaragua es un problema que afecta de manera integral el bienestar de las personas, los animales, la vegetación, los acuíferos y la calidad del aire respirable. Aunque nuestra nación posee una inmensa dotación de recursos naturales y áreas boscosas protegidas, estos activos se han degradado progresivamente.<br><br>Este deterioro es impulsado por la dispersión descontrolada de basura, la deforestación desmedida, las quemas agrícolas, la emisión de gases vehiculares y la negligencia cívica e industrial. El estudio de este fenómeno busca concienciar sobre sus efectos perjudiciales.<br><br>La contaminación no solo distorsiona la belleza escénica del paisaje nacional, sino que constituye un detonante de epidemias bronquiales agudas, infecciones estomacales severas por aguas contaminadas y la degradación generalizada de la capacidad agrícola de nuestro suelo.`,
+    source: "Sección 1: Informe Escolar de Ciencias Naturales (Pág. 3)"
+  },
+  {
+    num: "02",
+    title: "La Crisis de la Contaminación Hídrica",
+    text: `Nicaragua cuenta con una red hidrográfica invaluable, liderada por el Gran Lago de Nicaragua (Cocibolca) y el Lago de Managua (Xolotlán). Lamentablemente, un alto porcentaje de estos reservorios y ríos asociados reciben descargas crudas de aguas negras domésticas y desechos industriales sin previo filtrado.<br><br>El Ministerio de Salud (MINSA, 2011) en su Normativa 066 señala expresamente que la vigilancia y el control sanitario de las fuentes de agua dulce son obligatorios para mitigar brotes infecciosos severos en el consumo de la población.<br><br>Las aguas contaminadas por lixiviados y desechos sólidos son vehículos de parásitos, cólera y hepatitis, afectando principalmente a comunidades de áreas rurales donde el acceso a acueductos potables es limitado y dependen de pozos vulnerables.`,
+    source: "Sección 2: Normativa 066 MINSA / Banco de Datos de OPS"
+  },
+  {
+    num: "03",
+    title: "Monóxido y Calidad de Aire Atmosférico",
+    text: `La pureza del aire se ve amenazada por las emisiones de motores vehiculares antiguos, el polvo en suspensión de áreas erosionadas y la combustión abierta de basura doméstica e industrial. En zonas suburbanas, la cocción de alimentos utilizando leña húmeda empeora este escenario.<br><br>El Banco Mundial (2024) advierte en sus informes ecológicos regionales que la mala calidad del aire interno y externo constituye un factor crítico de salud en Nicaragua, provocando un impacto desfavorable sobre la esperanza de vida.<br><br>Las quemas agrícolas implementadas para preparar cosechas liberan miles de toneladas de material particulado a la atmósfera, el cual es inhalado de forma continua por comunidades residenciales vecinas.`,
+    source: "Sección 3: Estadísticas del Banco Mundial (2024)"
+  },
+  {
+    num: "04",
+    title: "Infiltración y Toxicidad de los Suelos",
+    text: `El suelo se ve agredido de manera directa por la aplicación irresponsable de pesticidas, fungicidas y herbicidas de síntesis química en la agricultura masiva, además del descarte de aceites automotrices usados sobre la tierra.<br><br>La pérdida de los nutrientes orgánicos superiores debilita la retención de agua y causa erosión. Adicionalmente, durante la temporada lluviosa de Nicaragua, las corrientes pluviales arrastran los depósitos de tóxicos del suelo directamente hacia las cuencas de ríos inferiores.<br><br>Cuidar los suelos no solo protege los ecosistemas locales, sino que garantiza la viabilidad del sector agrícola, el cual representa una piedra angular para la economía, el sustento y el bienestar de los hogares nicaragüenses.`,
+    source: "Sección 4: Marco de Suelos y Agroquímicos (Pág. 4)"
+  },
+  {
+    num: "05",
+    title: "Gestión Inadecuada de Residuos Sólidos",
+    text: `Una de las expresiones más preocupantes de contaminación visual y sanitaria es la persistencia de focos informales de basura en calles céntricas, cauces secos, predios abandonados y lagunas urbanas.<br><br>La falta de clasificación de plásticos y metales obstruye los sistemas de drenaje pluvial, provocando inundaciones severas en el invierno de Managua. Además, la descomposición desatendida genera lixiviados que percolan hacia los acuíferos subterráneos de consumo.<br><br>El Ministerio del Ambiente y los Recursos Naturales (MARENA) destaca la urgencia de modernizar los rellenos sanitarios y clausurar botaderos informales para resguardar la salud ambiental general.`,
+    source: "Informes GEO Nicaragua - MARENA"
+  },
+  {
+    num: "06",
+    title: "La Pérdida del Patrimonio Forestal",
+    text: `La deforestación y la degradación forestal avanzan a paso firme en zonas críticas como la Reserva de Biosfera Bosawás e Indio Maíz debido a la ganadería extensiva ilegal y la conversión de bosques vírgenes en cultivos de subsistencia.<br><br>El Sistema de la Integración Centroamericana (SICA) indica en sus estudios territoriales que la pérdida acelerada de los bosques nativos limita la captura de dióxido de carbono y desprotege las cuencas de agua, agudizando la sequía local.<br><br>Los árboles actúan como barreras contra la erosión del viento y de la lluvia. La tala inmoderada resulta en suelos desertificados imposibles de cultivar a largo plazo.`,
+    source: "Diagnóstico de Paisaje Forestal - SICA"
+  },
+  {
+    num: "07",
+    title: "Impacto en Salud y Pérdida de Biodiversidad",
+    text: `Los ecosistemas de Nicaragua albergan miles de especies endémicas de fauna silvestre, orquídeas y microorganismos. Al contaminar las reservas, lagunas y bosques primarios, se elimina su sustento biológico provocando su migración o muerte sistemática.<br><br>La FAO (2015) afirma que los ecosistemas sanos son esenciales para mitigar los desastres naturales y conservar la estabilidad agrícola. El equilibrio biológico de la nación se rompe al deteriorar los biomas locales.<br><br>De forma paralela, las poblaciones humanas ven disminuida su calidad de vida ante la prevalencia de alergias, tos crónica y gastroenteritis agudas desencadenadas por la degradación del entorno.`,
+    source: "FAO (2015) / Determinantes Ambientales de Salud OPS"
+  },
+  {
+    num: "08",
+    title: "Rol del Estado, Leyes y Acción Ciudadana",
+    text: `La preservación de los recursos naturales y el manejo integral de desechos sólidos es un deber compartido. Si bien el Estado y las Municipalidades formulan normativas ambientales y coordinan camiones colectores, la labor es infructuosa sin participación ciudadana.<br><br>Cada persona puede generar aportes inmensos desde sus rutinas en el hogar, la escuela y la oficina. Acciones sencillas como deponer el uso del fuego para deshacerse de malezas, ahorrar el agua de pozos y reciclar plásticos provocan cambios sustanciales.<br><br>El fomento de la educación ecológica comunitaria representa la única vía para infundir valores de conservación sustentables en las futuras generaciones de estudiantes nicaragüenses.`,
+    source: "Compendio de Leyes Ambientales de Nicaragua - MARENA"
+  }
+];
+
+(function initChapterVisor() {
+  const navList = document.getElementById('visorNavList');
+  const displayTag = document.getElementById('visorChapterTag');
+  const displayTitle = document.getElementById('visorChapterTitle');
+  const displayText = document.getElementById('visorChapterText');
+  const displaySource = document.getElementById('visorChapterSource');
+  const displayPane = document.getElementById('visorDisplay');
+
+  if (!navList || !displayPane) return;
+
+  window.selectChapter = function(index) {
+    const ch = CHAPTERS_DATA[index];
+    if (!ch) return;
+
+    // Toggle active state of buttons
+    const buttons = navList.querySelectorAll('.visor-nav-btn');
+    buttons.forEach((btn, idx) => {
+      if (idx === index) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    // Add fade-out animation class
+    displayPane.classList.add('visor-fade-out');
+
+    setTimeout(() => {
+      displayTag.textContent = `Capítulo ${index + 1}`;
+      displayTitle.textContent = ch.title;
+      displayText.innerHTML = ch.text;
+      displaySource.innerHTML = `<strong>Fuente:</strong> ${ch.source}`;
+
+      displayPane.classList.remove('visor-fade-out');
+      displayPane.classList.add('visor-fade-in');
+
+      setTimeout(() => {
+        displayPane.classList.remove('visor-fade-in');
+      }, 300);
+    }, 250);
+  };
+})();
+
+// ============================================================
+// SECTION 10: PRUEBA DE APRENDIZAJE (DESAFÍO ECO-CONSCIENTE)
+// ============================================================
+const QUIZ_QUESTIONS = [
+  {
+    question: "¿Qué institución sanitaria regula la vigilancia del agua para consumo humano en Nicaragua?",
+    options: [
+      "El Ministerio de Educación (MINED)",
+      "El Ministerio de Salud (MINSA) a través de la Normativa 066",
+      "El Banco Mundial directamente",
+      "La Organización de las Naciones Unidas (ONU)"
+    ],
+    answer: 1,
+    explanation: "La Normativa 066 del MINSA establece expresamente el control sanitario obligatorio de las fuentes de agua dulce en Nicaragua."
+  },
+  {
+    question: "¿Qué factor crítico advierte el Banco Mundial (2024) sobre la salud y la esperanza de vida en Nicaragua?",
+    options: [
+      "La calidad y conservación de áreas urbanas",
+      "La mala calidad del aire interno y externo",
+      "La escasez de producción pesquera",
+      "El retroceso de glaciares andinos"
+    ],
+    answer: 1,
+    explanation: "El Banco Mundial (2024) indica que la mala calidad del aire constituye un factor crítico de salud en Nicaragua, impactando directamente la esperanza de vida."
+  },
+  {
+    question: "¿Cuáles son los principales contaminantes del suelo causados por la agricultura masiva en Nicaragua?",
+    options: [
+      "Emisiones de azufre volcánico",
+      "Pesticidas, fungicidas y herbicidas de síntesis química",
+      "Residuos plásticos domésticos no clasificados",
+      "Aguas grises urbanas filtradas"
+    ],
+    answer: 1,
+    explanation: "El uso excesivo e irresponsable de pesticidas, fungicidas y herbicidas sintéticos contamina la capa fértil superior del suelo y las cuencas bajas."
+  },
+  {
+    question: "¿Qué efecto directo provoca la acumulación de basura y plásticos en los drenajes pluviales de Managua durante el invierno?",
+    options: [
+      "Erosión costera acelerada",
+      "Inundaciones urbanas severas",
+      "Disminución de la sismicidad regional",
+      "Fertilidad del manto freático superior"
+    ],
+    answer: 1,
+    explanation: "La falta de clasificación y la acumulación de plásticos en cauces obstruyen el sistema de drenaje, lo que provoca inundaciones severas en el invierno de Managua."
+  },
+  {
+    question: "¿Cuáles son las dos áreas de reserva de biosfera nicaragüenses más amenazadas por la ganadería extensiva ilegal y la deforestación?",
+    options: [
+      "Volcán Masaya y Reserva Chocoyero",
+      "Reserva de Biosfera Bosawás e Indio Maíz",
+      "Lago Cocibolca y Reserva Laguna de Apoyo",
+      "Volcán Mombacho y Selva Negra"
+    ],
+    answer: 1,
+    explanation: "Tanto Bosawás como Indio Maíz enfrentan graves riesgos por invasión agrícola y ganadera ilegal, reduciendo drásticamente nuestro patrimonio forestal."
+  }
+];
+
+(function initQuiz() {
+  let currentIdx = 0;
+  let score = 0;
+  let hasAnswered = false;
+
+  const quizCard = document.getElementById('quizCard');
+  const scoreboard = document.getElementById('quizScoreboard');
+  const questionText = document.getElementById('quizQuestion');
+  const optionsContainer = document.getElementById('quizOptions');
+  const feedbackBox = document.getElementById('quizFeedback');
+  const feedbackIcon = document.getElementById('feedbackIcon');
+  const feedbackTitle = document.getElementById('feedbackTitle');
+  const feedbackText = document.getElementById('feedbackText');
+  const nextBtn = document.getElementById('quizNextBtn');
+  const currentText = document.getElementById('quizCurrentText');
+  const scoreText = document.getElementById('quizScoreText');
+  const progressFill = document.getElementById('quizProgressFill');
+
+  if (!questionText || !optionsContainer) return;
+
+  function loadQuestion(index) {
+    hasAnswered = false;
+    const q = QUIZ_QUESTIONS[index];
+    if (!q) return;
+
+    // Update stats
+    currentText.textContent = index + 1;
+    scoreText.textContent = score;
+    progressFill.style.width = `${((index + 1) / QUIZ_QUESTIONS.length) * 100}%`;
+
+    // Load Question Text
+    questionText.textContent = q.question;
+
+    // Render Options
+    optionsContainer.innerHTML = '';
+    q.options.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt-btn';
+      btn.innerHTML = `
+        <span class="opt-letter">${String.fromCharCode(65 + idx)}</span>
+        <span class="opt-text">${opt}</span>
+        <span class="opt-status-icon"></span>
+      `;
+      btn.onclick = () => selectOption(idx, btn);
+      optionsContainer.appendChild(btn);
+    });
+
+    // Reset Feedback and Next Button
+    feedbackBox.style.display = 'none';
+    nextBtn.disabled = true;
+    nextBtn.querySelector('span').textContent = index === QUIZ_QUESTIONS.length - 1 ? "Ver Resultados" : "Siguiente Pregunta";
+  }
+
+  function selectOption(selectedIdx, btnElement) {
+    if (hasAnswered) return;
+    hasAnswered = true;
+
+    const q = QUIZ_QUESTIONS[currentIdx];
+    const isCorrect = selectedIdx === q.answer;
+
+    // Disable all options
+    const options = optionsContainer.querySelectorAll('.quiz-opt-btn');
+    options.forEach((btn, idx) => {
+      btn.disabled = true;
+      if (idx === q.answer) {
+        btn.classList.add('correct');
+        btn.querySelector('.opt-status-icon').textContent = '✅';
+      } else if (idx === selectedIdx) {
+        btn.classList.add('incorrect');
+        btn.querySelector('.opt-status-icon').textContent = '❌';
+      }
+    });
+
+    if (isCorrect) {
+      score++;
+      scoreText.textContent = score;
+      feedbackIcon.textContent = '🌱';
+      feedbackTitle.textContent = '¡Correcto!';
+      feedbackBox.className = 'quiz-feedback correct-feedback';
+    } else {
+      feedbackIcon.textContent = '⚠️';
+      feedbackTitle.textContent = 'Incorrecto';
+      feedbackBox.className = 'quiz-feedback incorrect-feedback';
+    }
+
+    // Set feedback text and show box
+    feedbackText.textContent = q.explanation;
+    feedbackBox.style.display = 'block';
+    
+    // Enable Next Button
+    nextBtn.disabled = false;
+  }
+
+  window.nextQuestion = function() {
+    currentIdx++;
+    if (currentIdx < QUIZ_QUESTIONS.length) {
+      // Transition animation
+      quizCard.classList.add('quiz-fade-out');
+      setTimeout(() => {
+        loadQuestion(currentIdx);
+        quizCard.classList.remove('quiz-fade-out');
+        quizCard.classList.add('quiz-fade-in');
+        setTimeout(() => quizCard.classList.remove('quiz-fade-in'), 300);
+      }, 250);
+    } else {
+      showScoreboard();
+    }
+  };
+
+  function showScoreboard() {
+    quizCard.style.display = 'none';
+    
+    const percent = Math.round((score / QUIZ_QUESTIONS.length) * 100);
+    document.getElementById('scorePercent').textContent = `${percent}%`;
+    document.getElementById('scoreFraction').textContent = `(${score} de ${QUIZ_QUESTIONS.length} aciertos)`;
+
+    const emojiEl = document.getElementById('scoreEmoji');
+    const titleEl = document.getElementById('scoreTitle');
+    const msgEl = document.getElementById('scoreMsg');
+
+    if (score === QUIZ_QUESTIONS.length) {
+      emojiEl.textContent = '🏆';
+      titleEl.textContent = '¡Desafío Completado!';
+      msgEl.textContent = '¡Eco-Héroe Perfecto! Tienes un conocimiento científico impecable sobre el medio ambiente en Nicaragua.';
+    } else if (score >= 3) {
+      emojiEl.textContent = '🌱';
+      titleEl.textContent = '¡Excelente Guardián!';
+      msgEl.textContent = 'Tu nivel de conciencia ecológica es alto, sigue promoviendo el cambio.';
+    } else {
+      emojiEl.textContent = '🍂';
+      titleEl.textContent = '¡Sigue Aprendiendo!';
+      msgEl.textContent = 'Vuelve a leer los capítulos para mejorar tu puntaje y ayudar a proteger Nicaragua.';
+    }
+
+    scoreboard.style.display = 'block';
+    scoreboard.classList.add('quiz-fade-in');
+  }
+
+  window.restartQuiz = function() {
+    currentIdx = 0;
+    score = 0;
+    scoreboard.style.display = 'none';
+    quizCard.style.display = 'block';
+    loadQuestion(0);
+  };
+
+  // Init first question
+  loadQuestion(0);
+})();
